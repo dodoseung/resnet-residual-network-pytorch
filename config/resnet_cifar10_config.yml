@@ -1,0 +1,33 @@
+# Data parameters
+data:
+  seed: 777
+  data_path: '~/.pytorch/CIFAR_data/'
+  download: True
+  batch_size: 512
+  shuffle: True
+  drop_last: True
+  download: True
+  num_workers: 4
+  img_size: [224, 224]
+
+# Model parameters
+model:
+  input_channel: 3
+  output_channel: 10
+  num_blocks: 18
+
+# Training parameters
+train:
+  epochs: 300
+  lr: 0.001
+  betas: [0.9, 0.999]
+  eps: 0.00000001
+  weight_decay: 0.01
+
+# Save
+save:
+  model_name: 'cifar10'
+
+# Other parameters
+others:
+  log_period: 10
