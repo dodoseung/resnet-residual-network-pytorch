@@ -3,18 +3,18 @@ data:
   seed: 777
   data_path: '~/.pytorch/CIFAR_data/'
   download: True
-  batch_size: 512
+  batch_size: 8192
   shuffle: True
   drop_last: True
   download: True
   num_workers: 4
-  img_size: [224, 224]
+  img_size: [32, 32]
 
 # Model parameters
 model:
   input_channel: 3
   output_channel: 10
-  num_blocks: 18
+  num_blocks: 50
 
 # Training parameters
 train:
@@ -30,4 +30,4 @@ save:
 
 # Other parameters
 others:
-  log_period: 10
+  log_period: 1

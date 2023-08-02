@@ -43,12 +43,12 @@ optimizer = optim.AdamW(model.parameters(),
                         weight_decay=config['train']['weight_decay'])
 
 # Training
-def train(epoch, train_loader, optimizer, criterion):
+def train(epoch, data_loader, optimizer, criterion):
   model.train()
   train_loss = 0.0
   train_num = 0
 
-  for i, data in enumerate(train_loader):
+  for i, data in enumerate(data_loader):
     # get the inputs; data is a list of [inputs, labels]
     inputs, labels = data
     
@@ -70,7 +70,7 @@ def train(epoch, train_loader, optimizer, criterion):
     train_num += labels.size(0)
     
     if i % config['others']['log_period'] == 0 and i != 0:
-      print(f'[{epoch}, {i}]\t Train loss: {train_loss / train_num:.5f}')
+      print(f'[{epoch}, {i}]\t Train loss: {train_loss / train_num:.10f}')
   
   # Average loss
   train_loss /= train_num
@@ -78,12 +78,12 @@ def train(epoch, train_loader, optimizer, criterion):
   return train_loss
 
 # Validation
-def valid(train_loader):
+def test(data_loader):
   model.eval()
   corrects = 0
   test_num = 0
 
-  for data in train_loader:
+  for data in data_loader:
     # get the inputs; data is a list of [inputs, labels]
     inputs, labels = data
       
@@ -113,10 +113,10 @@ if __name__ == '__main__':
     train_loss = train(epoch, train_loader, optimizer, criterion)
     
     # Validation
-    test_accuracy = valid(train_loader)
+    test_accuracy = test(test_loader)
     
     # Print the log
-    print(f'Epoch: {epoch}\t Train loss: {train_loss:.3f}\t Valid accuracy: {test_accuracy:.3f}')
+    print(f'Epoch: {epoch}\t Train loss: {train_loss:.10f}\t Test accuracy: {test_accuracy:.3f}')
     
     # Save the model
     save_model(model_name=config['save']['model_name'], epoch=epoch, model=model, optimizer=optimizer, loss=train_loss, config=config)
