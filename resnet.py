@@ -35,6 +35,18 @@ class ResNet(nn.Module):
                                          BottleneckBlock(input_channel=256, in_channel=128, output_channel=512, num_blocks=4, img_downsize=True),
                                          BottleneckBlock(input_channel=512, in_channel=256, output_channel=1024, num_blocks=6, img_downsize=True),
                                          BottleneckBlock(input_channel=1024, in_channel=512, output_channel=2048, num_blocks=3, img_downsize=True)])
+        
+        elif self.num_blocks == 101:
+            self.resnet = nn.ModuleList([BottleneckBlock(input_channel=64, in_channel=64, output_channel=256, num_blocks=3, img_downsize=False),
+                                         BottleneckBlock(input_channel=256, in_channel=128, output_channel=512, num_blocks=4, img_downsize=True),
+                                         BottleneckBlock(input_channel=512, in_channel=256, output_channel=1024, num_blocks=23, img_downsize=True),
+                                         BottleneckBlock(input_channel=1024, in_channel=512, output_channel=2048, num_blocks=3, img_downsize=True)])
+            
+        elif self.num_blocks == 152:
+            self.resnet = nn.ModuleList([BottleneckBlock(input_channel=64, in_channel=64, output_channel=256, num_blocks=3, img_downsize=False),
+                                         BottleneckBlock(input_channel=256, in_channel=128, output_channel=512, num_blocks=8, img_downsize=True),
+                                         BottleneckBlock(input_channel=512, in_channel=256, output_channel=1024, num_blocks=36, img_downsize=True),
+                                         BottleneckBlock(input_channel=1024, in_channel=512, output_channel=2048, num_blocks=3, img_downsize=True)])
             
         # Set the output layer
         if self.num_blocks in [18, 34]:
